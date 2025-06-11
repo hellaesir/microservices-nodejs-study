@@ -1,6 +1,4 @@
-import '@opentelemetry/auto-instrumentations-node/register'
 import {trace} from '@opentelemetry/api'
-
 import { fastify } from 'fastify'
 import { randomUUID } from 'node:crypto'
 import { setTimeout } from 'node:timers/promises'
@@ -11,7 +9,6 @@ import {
     validatorCompiler,
     type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
-import { channels } from '../broker/channels/index.ts'
 import { db } from '../db/client.ts'
 import { schema } from '../db/schema/index.ts'
 import { dispatchOrderCreated } from '../broker/messages/order-created.ts'
