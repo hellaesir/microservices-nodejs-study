@@ -3,7 +3,7 @@ import * as pulumi from '@pulumi/pulumi'
 
 import { cluster } from "../cluster";
 import { kongDockerImage } from '../images/kong';
-import { ordersAdminHttpListener } from './orders'
+import { ordersHttpListener } from './orders'
 import { appLoadBalancer } from '../load-balancer';
 
 const proxyTargetGroup = appLoadBalancer.createTargetGroup('proxy-target', {
@@ -70,7 +70,7 @@ export const kongService = new awsx.classic.ecs.FargateService('fargate-kong', {
         { name: 'KONG_ADMIN_LISTEN', value: '0.0.0.0:8001' },
         { 
           name: 'ORDERS_SERVICE_URL', 
-          value: pulumi.interpolate`http://${ordersAdminHttpListener.endpoint.hostname}:${ordersAdminHttpListener.endpoint.port}`,
+          value: pulumi.interpolate`http://${ordersHttpListener.endpoint.hostname}:${ordersHttpListener.endpoint.port}`,
         },
       ],
     },
